@@ -1,0 +1,77 @@
+---
+# Install GIT, Nginx, PHP & Mysql
+
+- name: Update all packages to their latest version
+  apt:
+    name: "*"
+    force_apt_get: True
+    state: latest
+
+
+- name: Install Curl
+  apt: "name=curl update_cache=yes state=latest"
+
+- name: Install GIT
+  apt:
+    name: git
+    state: present
+
+- name: Install Python3
+  apt: "name=python3-venv update_cache=yes state=latest"
+
+- name: Install Python2
+  apt: "name=python2 update_cache=yes state=latest"  
+
+- name: Install PIP
+  apt: "name=python3-pip update_cache=yes state=latest"
+
+- name: Install python3-mysqldb
+  apt: "name=python3-mysqldb update_cache=yes state=latest"
+
+- name: Install nodejs
+  apt: "name=nodejs update_cache=yes state=latest"
+
+- name: Install npm
+  apt: "name=npm update_cache=yes state=latest"
+
+- name: Install python-setuptools
+  apt: "name=python-setuptools update_cache=yes state=latest"
+
+
+- name: Install PyOpenSSL
+  pip:
+    name: PyOpenSSL
+
+- name: Install cryptography
+  pip:
+    name: cryptography
+
+- name: Install MYSQL
+  apt: "name=mariadb-server update_cache=yes state=latest"
+  
+- name: Install PHP
+  apt: "name=php update_cache=yes state=latest"
+
+- name: Install PHP fpm
+  apt: "name=php-fpm update_cache=yes state=latest"
+
+- name: Install PHP mysql driver
+  apt: "name=php-mysql update_cache=yes state=latest" 
+
+- name: Install php curl
+  apt: "name=php-curl update_cache=yes state=latest"
+
+- name: Install php dom
+  apt: "name=php-xml update_cache=yes state=latest"
+
+- name: Install zip
+  apt: "name=zip update_cache=yes state=latest"
+
+- name: Install unzip
+  apt: "name=unzip update_cache=yes state=latest"
+
+- name: Install php-zip
+  apt: "name=php-zip update_cache=yes state=latest"
+
+- name: Nginx basic auth tools
+  apt: "name=apache2-utils update_cache=yes state=latest"

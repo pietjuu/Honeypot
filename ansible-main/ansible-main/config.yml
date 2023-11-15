@@ -1,0 +1,31 @@
+---
+
+- name: Create directory ~/code/honeypot  
+  file:
+    path: "/home/killerb/code/honeypot"
+    state: directory
+
+
+- name: Create .ssh directory
+  file:
+    path: "/home/killerb/.ssh"
+    state: directory
+    owner: killerb
+    group: killerb
+    mode: '600'
+  
+- name: Copy ssh private keys from local to remote
+  copy:
+    src: "/home/pieter/.ssh/id_ed25519"
+    dest: "/home/killerb/.ssh/id_ed25519"
+
+- name: Copy ssh public keys from local to remote
+  copy:
+    src: "/home/pieter/.ssh/id_ed25519.pub"
+    dest: "/home/killerb/.ssh/id_ed25519.pub"
+
+
+- name: Change directory permissions
+  shell: chmod 600 *
+  args:
+    chdir: "/home/killerb/.ssh/"

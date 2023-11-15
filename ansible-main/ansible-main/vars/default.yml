@@ -1,0 +1,16 @@
+---
+# Variables for config
+
+source_folder: "/home/killerb/code/honeypot"
+dest_folder: "/var/www/honeypot"
+
+git_repo: ""
+
+key_directory: "/home/killerb/.ssh"
+
+
+key_file: "/home/killerb/.ssh/id_ed25519"
+
+
+key_file_private: "/home/milan/.ssh/id_ed25519"
+key_file_public: "/home/milan/.ssh/id_ed25519.pub"

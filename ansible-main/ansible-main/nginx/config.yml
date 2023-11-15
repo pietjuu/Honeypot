@@ -1,0 +1,43 @@
+---
+
+- name: Install nginx
+  apt: "name=nginx update_cache=yes state=latest"
+
+- name: Create directory /etc/ssl/localcerts
+  file:
+    path: /etc/ssl/localcerts
+    state: directory 
+    mode: 0775
+
+
+- name: Generate SSL keys
+  openssl_privatekey:
+    path: /etc/ssl/localcerts/honeypot.key
+    size: 2048
+
+- openssl_csr:
+    path: /etc/ssl/localcerts/honeypot.csr
+    privatekey_path: /etc/ssl/localcerts/honeypot.key
+
+- openssl_certificate:
+    provider: selfsigned
+    path: /etc/ssl/localcerts/honeypot.crt
+    privatekey_path: /etc/ssl/localcerts/honeypot.key
+    csr_path: /etc/ssl/localcerts/honeypot.csr
+ 
+- name: Setup NGINX HTTPS 
+  template:
+    src: "files/nginx_ssl.conf"
+    dest: "/etc/nginx/sites-available/honeypot_ssl_basic.conf"
+
+
+- name: Set nginx configuration using template
+  template:
+    src: "files/nginx.conf"
+    dest: "/etc/nginx/nginx.conf"
+
+- name: Create Symlink to enable HTTPS NGINX
+  file:
+    src: "/etc/nginx/sites-available/honeypot_ssl_basic.conf"
+    dest: "/etc/nginx/sites-enabled/honeypot_ssl_basic.conf"
+    state: link
